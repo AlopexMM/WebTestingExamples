@@ -1,4 +1,4 @@
-from core.webTestObject import WebTestObject
+from core.TestObject import WebTestObject
 
 
 class EnglishStrong(WebTestObject):
