@@ -1,8 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from core import settings
-from core.TestObject import WebTestObject
+from test_objects.wikipedia import Wikipedia
+import re
 
 
 class TestIndex:
@@ -12,6 +14,7 @@ class TestIndex:
     options.add_argument('--disable-extensions')
     driver = webdriver.Chrome(settings.CHROME_DRIVER, options=options)
     wait = WebDriverWait(driver, float(5))
+    wiki = Wikipedia()
 
     # Tests
     def test_get_index(self):
@@ -26,11 +29,8 @@ class TestIndex:
         """
         W2 - Should find the words English and Español
         """
-        english = WebTestObject(xpath='//div/a/strong[text()="English"]')
-        spanish = WebTestObject(xpath='//div/a/strong[text()="Español"]')
-
-        find_english = self.driver.find_element(By.XPATH, english.xpath)
-        find_spanish = self.driver.find_element(By.XPATH, spanish.xpath)
+        find_english = self.driver.find_element(By.XPATH, self.wiki.strong_english)
+        find_spanish = self.driver.find_element(By.XPATH, self.wiki.strong_spanish)
         assert find_english.text == 'English'
 
         assert find_spanish.text == 'Español'
@@ -39,10 +39,19 @@ class TestIndex:
         """
         W3 - Should find input search box
         """
-        pass
+        input_search_box = self.driver.find_element(By.XPATH, self.wiki.input_search_box)
+        assert input_search_box.is_displayed() == True
 
-    def test_search_work(self):
+    def test_search_word(self):
         """
         W4 - Input the word pc and be redirected to the results page
         """
-        pass
+        input_search_box = self.driver.find_element(By.XPATH, self.wiki.input_search_box)
+        input_search_box.send_keys('pc')
+        input_search_box.send_keys(Keys.ENTER)
+        # We wait to load the page
+        self.wait.until(self.driver.find_element(By.TAG_NAME, 'title').is_displayed())
+
+        assert re.search('PC', self.driver.title) == True
+
+
