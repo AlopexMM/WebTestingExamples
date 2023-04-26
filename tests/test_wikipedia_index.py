@@ -4,10 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from core import settings
 from test_objects.wikipedia import Wikipedia
-from time import sleep
 import re
-import selenium.webdriver.support.expected_conditions as ec
-
 
 # Before test
 options = webdriver.ChromeOptions()
