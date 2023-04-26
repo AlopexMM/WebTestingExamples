@@ -10,7 +10,7 @@ If the project has some user info that is private please use the env file. REMEM
 BASE_PATH = os.path.abspath("")
 
 # Drivers
-CHROME_DRIVER = "/home/mario/web_drivers/chromedriver"
+CHROME_DRIVER = "C:\\Users\\mario\\webDrivers\\chromedriver.exe"
 FIREFOX_DRIVER = ""
 SAFARI_DRIVER = ""
 
