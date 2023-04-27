@@ -22,7 +22,7 @@ class TestIndex:
         """
         W1 - Should get access to wikipedia page
         """
-        driver.get(settings.INIT_PAGE)
+        driver.get(wiki.INIT_PAGE)
 
         assert driver.title == "Wikipedia"
 

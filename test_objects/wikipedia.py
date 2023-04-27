@@ -8,3 +8,5 @@ class Wikipedia:
 
         # Input tags
         self.input_search_box = '//div/input[@id="searchInput"]'
+
+        self.INIT_PAGE = "https://wikipedia.org"
