@@ -5,5 +5,14 @@ class Twitter:
         """
         Objects for Twitter tests
         """
+        self.INIT_PAGE = 'https://twitter.com'
         self.USER = settings.env('TWITTER_USER')
         self.PASSWORD = settings.env('TWITTER_PASSWORD')
+        self.LOGIN_BUTTON = '//div/span/span[contains(text(), "Iniciar sesión")]'
+        self.LOGIN_MODAL_USER_INPUT = '//input[@autocomplete="username"]'
+        self.LOGIN_MODAL_NEXT_BUTTON = '//div/span/span[contains(text(), "Siguiente")]'
+        self.LOGIN_MODAL_PASSWORD_INPUT = '//input[@autocomplete="current-password" and @name="password"]'
+        self.LOGIN_MODAL_LOGIN_BUTTON = '//div[@data-testid="LoginForm_Login_Button"]/div/span/span[text()="Iniciar sesión"]'
+        self.LOGIN_MODAL = '//div[@aria-labelledby="modal-header"]'
+        self.USER_PORTAL = '//div[@aria-label="Menú de la cuenta"]/div/div/div/div/div/span/span[text()="' + \
+                           settings.env('TWITTER_USERNAME') + '"]'
