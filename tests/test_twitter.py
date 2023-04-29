@@ -57,3 +57,53 @@ class TestTwitter:
         # Find user portal load
         sleep(10)
         driver.find_element(By.XPATH, twitter.USER_PORTAL)
+
+    def test_search_box(self):
+        """
+        T3 - Input in search box Selenium
+        """
+
+        # Input the word selenium in the search box
+        search_box = driver.find_element(By.XPATH, twitter.SEARCH_BOX)
+        search_box.click()
+        search_box.send_keys("selenium")
+
+        # Find selenium user
+        sleep(3)
+        driver.find_element(By.XPATH, twitter.SELENIUM_USER).click()
+
+        # Check if is in Selenium portal
+        sleep(5)
+        assert driver.find_element(By.XPATH, twitter.SELENIUM_USER).is_displayed() == True
+        assert driver.find_element(By.XPATH, twitter.SELENIUM_ABOUT).is_displayed() == True
+
+    def test_tweet_something(self):
+        """
+        T4 - Make a tweet
+        """
+        # Go to you portal and search the tweet
+        driver.get(twitter.TWEETER_HOME_LINK)
+
+        # Click Tweet button
+        sleep(3)
+        driver.find_element(By.XPATH, twitter.TWEET_BUTTON).click()
+
+        # Write some text in the modal
+        sleep(5)
+        text_to_tweet = 'Hello this tweet was made using #python #pytest and #selenium.'
+        driver.find_element(By.XPATH, twitter.TWEET_MODAL_TEXTAREA).send_keys(text_to_tweet)
+
+        # Click Tweet button in modal
+        driver.find_element(By.XPATH, twitter.TWEET_MODAL_TWEET_BUTTON).click()
+
+        # Check for the tweet
+        sleep(5)
+        tweet_finded = False
+        section = driver.find_element(By.XPATH, twitter.TWEET_SECTION)
+        articles = section.find_elements(By.TAG_NAME, 'article')
+        for article in articles:
+            text_of_tweet = article.find_element(By.XPATH, '//div[@data-testid="tweetText"]').text
+            if text_of_tweet == text_to_tweet:
+                tweet_finded = True
+                break
+        assert tweet_finded == True
