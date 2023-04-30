@@ -31,7 +31,7 @@ class TestTwitter:
 
     def test_login(self):
         """
-        T2 - Log in into Twitter using second factor that is a manual step
+        T2 - Log in into Twitter, I have to use second factor and that is a manual step
         """
 
         # Click on Log in button (Iniciar sesión)
